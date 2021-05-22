@@ -1,6 +1,5 @@
 package com.employeepayroll;
 
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 public class EmployeePayRollServiceTest {
