@@ -1,5 +1,7 @@
 package com.employeepayrolljdbc;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class EmployeePayrollService {
@@ -24,6 +26,11 @@ public class EmployeePayrollService {
         if(ioService.equals(IOServices.DB_IO))
             this.employeePayrollList = new EmployeePayrollDBService().readData();
         return this.employeePayrollList;
+    }
+
+
+    public List<EmployeePayrollData> readEmployeePayrollDataForDataRange( LocalDate startDate, LocalDate endDate){
+        return employeePayrollDBService.getEmployeePayrollDataForDateRange(startDate,endDate);
     }
 
     public boolean checkEmployeePayrollInSyncWithDB(String name)
