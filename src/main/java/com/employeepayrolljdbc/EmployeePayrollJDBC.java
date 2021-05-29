@@ -1,4 +1,4 @@
-package com.employeepayroll;
+package com.employeepayrolljdbc;
 
 import java.sql.Connection;
 import java.sql.Driver;

@@ -4,3 +4,5 @@ com/employeepayroll/Java8WatchServiceExampleTest.java
  com.employeepayroll.Java8WatchServiceExampleTest
 com/employeepayroll/EmployeePayRollServiceTest.java
  com.employeepayroll.EmployeePayRollServiceTest
+com/employeepayrolljdbc/EmployeePayrollServiceTest.java
+ com.employeepayrolljdbc.EmployeePayrollServiceTest
