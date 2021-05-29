@@ -45,4 +45,13 @@ public class EmployeePayrollService {
         return this.employeePayrollList.stream().filter(employeePayrollData ->
                 employeePayrollData.name.equals(name)).findFirst().orElse(null);
     }
+
+    public void updateEmployeeBasicPay(String name, Double basic_pay){
+        int result = employeePayrollDBService.updateEmployeePayrollDataForBasicPay(name,basic_pay);
+        if (result == 0) return;
+        EmployeePayrollData employeePayrollData;
+        employeePayrollData= this.getEmployeePayrollData(name);
+        if (employeePayrollData != null)
+            employeePayrollData.basicPay = basic_pay;
+    }
 }

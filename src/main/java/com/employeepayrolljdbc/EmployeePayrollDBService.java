@@ -41,14 +41,29 @@ public class EmployeePayrollDBService {
                 int id = result.getInt("id");
                 String name = result.getString("name");
                 double salary = result.getDouble("salary");
+                double basicPay = result.getDouble("basic_pay");
                 LocalDate startDate = result.getDate("startdate").toLocalDate();
-                employeePayrollList.add(new EmployeePayrollData(id,name,salary,startDate));
+                employeePayrollList.add(new EmployeePayrollData(id,name,salary,basicPay,startDate));
             }
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return employeePayrollList;
+    }
+    int updateEmployeePayrollDataForBasicPay(String name, double basicPay){
+        return this.updateEmployeeDataUsingStatementForBasicPay(name, basicPay);
+    }
+
+    private int updateEmployeeDataUsingStatementForBasicPay(String name, double basicPay) {
+        String sql = String.format("UPDATE employee_payroll set basic_pay = %.2f where name = '%s';", basicPay,name);
+        try(Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            return statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     int updateEmployeePayrollData(String name, Double salary){
@@ -73,8 +88,9 @@ public class EmployeePayrollDBService {
                 int id = result.getInt("id");
                 String name = result.getString("name");
                 double salary = result.getDouble("salary");
+                double basicPay = result.getDouble("basic_pay");
                 LocalDate startDate = result.getDate("startdate").toLocalDate();
-                employeePayrollList.add(new EmployeePayrollData(id,name,salary,startDate));
+                employeePayrollList.add(new EmployeePayrollData(id,name,salary,basicPay,startDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
