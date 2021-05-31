@@ -43,9 +43,8 @@ public class EmployeePayrollDBService {
                 int id = result.getInt("id");
                 String name = result.getString("name");
                 double salary = result.getDouble("salary");
-                double basicPay = result.getDouble("basic_pay");
                 LocalDate startDate = result.getDate("startdate").toLocalDate();
-                employeePayrollList.add(new EmployeePayrollData(id,name,salary,basicPay,startDate));
+                employeePayrollList.add(new EmployeePayrollData(id,name,salary,startDate));
             }
             connection.close();
         } catch (SQLException e) {
@@ -90,9 +89,8 @@ public class EmployeePayrollDBService {
                 int id = result.getInt("id");
                 String name = result.getString("name");
                 double salary = result.getDouble("salary");
-                double basicPay = result.getDouble("basic_pay");
                 LocalDate startDate = result.getDate("startdate").toLocalDate();
-                employeePayrollList.add(new EmployeePayrollData(id,name,salary,basicPay,startDate));
+                employeePayrollList.add(new EmployeePayrollData(id,name,salary,startDate));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -230,6 +228,27 @@ public class EmployeePayrollDBService {
         {
             e.printStackTrace();
         }
+    }
+
+    public EmployeePayrollData addToEmployeePayroll(String name, String gender, double salary, LocalDate startDate) {
+        int employeeId = -1;
+        EmployeePayrollData employeePayrollData =  null;
+        String sql = String.format("INSERT INTO employee_payroll(name, gender, salary, startdate)" +
+                                    "values ('%s','%s','%s','%s')", name , gender,salary,Date.valueOf(startDate) );
+        try (Connection connection = this.getConnection())
+        {
+            Statement statement = connection.createStatement();
+            int rowAffected = statement.executeUpdate(sql, statement.RETURN_GENERATED_KEYS);
+            if(rowAffected==1){
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if(resultSet.next())employeeId = resultSet.getInt(1);
+            }
+            employeePayrollData = new EmployeePayrollData(employeeId,name, salary,startDate);
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return employeePayrollData;
     }
 }
 

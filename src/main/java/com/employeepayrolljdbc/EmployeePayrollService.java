@@ -9,6 +9,10 @@ public class EmployeePayrollService {
     private List<EmployeePayrollData> employeePayrollList;
     private EmployeePayrollDBService employeePayrollDBService;
 
+    public void addEmployeeToPayroll(String name, String gender, double salary, LocalDate startDate) {
+        employeePayrollList.add(employeePayrollDBService.addToEmployeePayroll(name,gender,salary, startDate));
+    }
+
     public enum IOServices {CONSOLE_ID, FILE_IO, DB_IO, REST_IO}
 
     public EmployeePayrollService()
@@ -60,7 +64,7 @@ public class EmployeePayrollService {
         EmployeePayrollData employeePayrollData;
         employeePayrollData= this.getEmployeePayrollData(name);
         if (employeePayrollData != null)
-            employeePayrollData.basicPay = basic_pay;
+            employeePayrollData.salary = basic_pay;
     }
 
     public Map<String, Double> getAverageSalaryGroupByGender(){

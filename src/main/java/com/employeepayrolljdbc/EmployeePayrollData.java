@@ -7,23 +7,22 @@ public class EmployeePayrollData {
     public int id;
     public String name;
     public double salary;
-    public double basicPay;
     public LocalDate startDate;
 
-    public EmployeePayrollData(int id, String name, double salary,double basicPay, LocalDate startDate) {
+    public EmployeePayrollData(int id, String name, double salary, LocalDate startDate) {
         this.id = id;
         this.name = name;
         this.salary = salary;
         this.startDate = startDate;
-        this.basicPay = basicPay;
     }
+
+
     @Override
     public String toString()
     {
         return "id=" + id +
                 ", name='" + name + '\'' +
                 ", salary=" + salary +
-                ", Basic Pay='" + basicPay + '\'' +
                 ", startDate=" + startDate +
                 '}';
     }
